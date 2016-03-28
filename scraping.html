@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Webサイトをつくってみよう</title>
+    </head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="jquery.xdomainajax.js"></script>
+    <body>
+        Hello world!
+        <div id="content"></div>
+    </body>
+    <script>
+        $(function() {
+            $.ajax({
+                url: 'http://www.amazon.co.jp/gp/product/4774153761/',
+                type: "GET",
+                success: function(res) {
+                    //console.log(res.responseText.$("#SalesRank").children('b'));
+                    console.log(res.responseText);
+                    $(res.responseText).find('#SalesRank').each(function() {
+                        var text = $(this).text();
+                        $('#content').append(text);
+                    });
+                }
+            });
+        });
+    </script>
+</html>
+
